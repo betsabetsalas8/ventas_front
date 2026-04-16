@@ -6,7 +6,11 @@ import Link from 'next/link';
 
 export default function Home() {
   const router = useRouter();
-  const [user, setUser] = useState(null);
+type User = {
+  rol: string;
+};
+
+const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const raw = localStorage.getItem('user');
