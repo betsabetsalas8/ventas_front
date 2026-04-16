@@ -1,0 +1,15 @@
+// services/clientesService.js
+import axios from 'axios';
+const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+
+export const getClientes = () =>
+  axios.get(`${API}/clientes`).then(res => Array.isArray(res.data) ? res.data : []);
+
+export const addCliente = (cliente) =>
+  axios.post(`${API}/clientes`, cliente).then(res => res.data);
+
+export const deleteCliente = (id) =>
+  axios.delete(`${API}/clientes/${id}`).then(res => res.data);
+
+export const updateCliente = (id, campos) =>
+  axios.patch(`${API}/clientes/${id}`, campos).then(res => res.data);
