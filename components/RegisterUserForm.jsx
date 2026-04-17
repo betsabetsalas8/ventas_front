@@ -2,6 +2,8 @@
 'use client';
 import { useState } from 'react';
 
+const API = process.env.NEXT_PUBLIC_API_URL || 'https://ventasback-production.up.railway.app/api';
+
 export default function RegisterUserForm({ onAdded }) {
   const [nombre, setNombre]     = useState('');
   const [password, setPassword] = useState('');
@@ -11,7 +13,7 @@ export default function RegisterUserForm({ onAdded }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:3001/api/usuarios/register', {
+      const res = await fetch(`${API}/usuarios/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nombre, password, rol })
@@ -21,7 +23,7 @@ export default function RegisterUserForm({ onAdded }) {
         setMensaje({ text: data.message, error: true });
         return;
       }
-      setMensaje({ text: `Usuario ${data.nombre} creado correctamente`, error: false });
+      setMensaje({ text: `Usuario creado correctamente`, error: false });
       setNombre('');
       setPassword('');
       setRol('usuario');
@@ -36,7 +38,6 @@ export default function RegisterUserForm({ onAdded }) {
   return (
     <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl border space-y-4">
       <h2 className="text-xl font-semibold text-gray-700">Registrar usuario</h2>
-
       <input
         type="text"
         placeholder="Nombre"
@@ -45,7 +46,6 @@ export default function RegisterUserForm({ onAdded }) {
         required
         className="border rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-sky-400"
       />
-
       <input
         type="password"
         placeholder="Contraseña"
@@ -54,7 +54,6 @@ export default function RegisterUserForm({ onAdded }) {
         required
         className="border rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-sky-400"
       />
-
       <select
         value={rol}
         onChange={e => setRol(e.target.value)}
@@ -63,14 +62,12 @@ export default function RegisterUserForm({ onAdded }) {
         <option value="usuario">Usuario</option>
         <option value="superusuario">Administrador</option>
       </select>
-
       <button
         type="submit"
         className="bg-green-500 text-white w-full py-2 rounded-lg hover:bg-green-600 transition"
       >
         Crear usuario
       </button>
-
       {mensaje.text && (
         <p className={`text-sm ${mensaje.error ? 'text-red-500' : 'text-green-600'}`}>
           {mensaje.text}
