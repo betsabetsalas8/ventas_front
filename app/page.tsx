@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-export default function Home() {
-  const router = useRouter();
 type User = {
   rol: string;
 };
 
-const [user, setUser] = useState<User | null>(null);
+export default function Home() {
+  const router = useRouter();
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const raw = localStorage.getItem('user');
@@ -33,11 +33,9 @@ const [user, setUser] = useState<User | null>(null);
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="max-w-6xl mx-auto p-10">
-
         <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
           Panel de Control
         </h2>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {modules.map((mod) => (
             <Link key={mod.path} href={mod.path}>
@@ -48,8 +46,6 @@ const [user, setUser] = useState<User | null>(null);
               </div>
             </Link>
           ))}
-
-          {/* Tarjeta Usuarios — solo superusuario */}
           {user.rol === 'superusuario' && (
             <Link href="/usuarios">
               <div className="bg-white border rounded-xl p-8 hover:shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer">
@@ -68,10 +64,8 @@ const [user, setUser] = useState<User | null>(null);
               </div>
             </Link>
           )}
-
         </div>
       </div>
-
       <footer className="text-center text-gray-500 mt-16 pb-6">
         Sistema de Ventas © 2026
       </footer>
