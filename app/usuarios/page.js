@@ -20,14 +20,14 @@ export default function UsuariosPage() {
 
   useEffect(() => {
     if (!user) return;
-    fetch('http://localhost:3001/api/usuarios')
+    fetch('https://ventasback-production.up.railway.app/api/usuarios')
       .then(r => r.json())
       .then(data => setUsuarios(Array.isArray(data) ? data : []));
   }, [user, reload]);
 
   const handleEliminar = async (id) => {
     if (!confirm('¿Eliminar este usuario?')) return;
-    await fetch(`http://localhost:3001/api/usuarios/${id}`, { method: 'DELETE' });
+    await fetch(`https://ventasback-production.up.railway.app/api/usuarios/${id}`, { method: 'DELETE' });
     setReload(!reload);
   };
 

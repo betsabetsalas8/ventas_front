@@ -40,7 +40,7 @@ export default function Navbar() {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:3001/api/usuarios/${user.id}/password`, {
+      const res = await fetch(`https://ventasback-production.up.railway.app/api/usuarios/${user.id}/password`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ actual: pwForm.actual, nueva: pwForm.nueva })
