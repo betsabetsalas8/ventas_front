@@ -3,8 +3,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { login } from '../../services/authService';
 
-const API = process.env.NEXT_PUBLIC_API_URL || 'https://ventasback-production.up.railway.app/api';
-
 export default function LoginPage() {
   const router = useRouter();
   const [form, setForm]       = useState({ nombre: '', password: '' });
@@ -19,19 +17,32 @@ export default function LoginPage() {
     setError('');
     try {
       const data = await login(form.nombre, form.password);
-      if (!data.tiendas || data.tiendas.length === 0) {
+      localStorage.setItem('user', JSON.stringify(data));
+
+      // Superusuario sin tiendas → ir a crear tiendas
+      if (data.rol === 'superusuario' && data.tiendas.length === 0) {
+        router.push('/usuarios');
+        return;
+      }
+
+      // Usuario normal sin tiendas
+      if (data.rol !== 'superusuario' && data.tiendas.length === 0) {
         setError('No tienes tiendas asignadas. Contacta al administrador.');
         return;
       }
+
+      // Solo una tienda → entrar directo
       if (data.tiendas.length === 1) {
-        localStorage.setItem('user', JSON.stringify(data));
         localStorage.setItem('tiendaId', data.tiendas[0].id);
         localStorage.setItem('tiendaNombre', data.tiendas[0].nombre);
         router.push('/');
-      } else {
-        setUser(data);
-        setTiendas(data.tiendas);
+        return;
       }
+
+      // Varias tiendas → elegir
+      setUser(data);
+      setTiendas(data.tiendas);
+
     } catch {
       setError('Usuario o contraseña incorrectos');
     } finally {
@@ -40,7 +51,6 @@ export default function LoginPage() {
   };
 
   const elegirTienda = (tienda) => {
-    localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('tiendaId', tienda.id);
     localStorage.setItem('tiendaNombre', tienda.nombre);
     router.push('/');
