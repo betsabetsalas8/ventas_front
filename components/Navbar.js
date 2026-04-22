@@ -30,6 +30,8 @@ export default function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('tiendaId');
+    localStorage.removeItem('tiendaNombre');
     router.push('/login');
   };
 
@@ -68,6 +70,9 @@ export default function Navbar() {
     { name: 'Pagos',    href: '/pagos' },
     { name: 'Envíos',   href: '/envios' },
   ];
+
+  // Ocultar navbar en login
+  if (pathname === '/login') return null;
 
   return (
     <>
