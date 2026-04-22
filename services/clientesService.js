@@ -2,8 +2,8 @@
 import axios from 'axios';
 const API = process.env.NEXT_PUBLIC_API_URL || 'https://ventasback-production.up.railway.app/api';
 
-export const getClientes = () =>
-  axios.get(`${API}/clientes`).then(res => Array.isArray(res.data) ? res.data : []);
+export const getClientes = (tiendaId) =>
+  axios.get(`${API}/clientes`, { params: tiendaId ? { tiendaId } : {} }).then(res => Array.isArray(res.data) ? res.data : []);
 
 export const addCliente = (cliente) =>
   axios.post(`${API}/clientes`, cliente).then(res => res.data);
