@@ -18,6 +18,7 @@ export default function ClientesPage() {
       return;
     }
     setUser(JSON.parse(raw));
+    setTiendaNombre(localStorage.getItem("tiendaNombre") || "");
   }, []);
 
   const handleLogout = () => {
@@ -52,7 +53,7 @@ export default function ClientesPage() {
 
           {/* Tabs — solo superusuario ve "Agregar Cliente" */}
           <div className="flex border-b">
-            {esSuperusuario && (
+            (true && (
               <button
                 onClick={() => setActiveTab('form')}
                 className={`flex-1 py-3 font-semibold transition ${
