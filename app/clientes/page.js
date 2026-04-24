@@ -10,6 +10,7 @@ export default function ClientesPage() {
   const [activeTab, setActiveTab] = useState('form');
   const [reload, setReload]       = useState(false);
   const [user, setUser]           = useState(null);
+  const [tiendaNombre, setTiendaNombre] = useState("");
 
   useEffect(() => {
     const raw = localStorage.getItem('user');
