@@ -32,21 +32,13 @@ export default function ClientesPage() {
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center p-10">
       <div className="w-full max-w-4xl">
-
         {/* Header */}
         <div className="flex items-center justify-between mb-4 px-1">
           <div>
-            <p className="text-sm text-gray-500">Bienvenido,</p>
-            <p className="font-semibold text-gray-700 flex items-center gap-2">
-              {user.nombre}
-              <span className={`text-xs px-2 py-0.5 rounded-full ${
-                esSuperusuario
-                  ? 'bg-sky-100 text-sky-700'
-                  : 'bg-gray-100 text-gray-500'
-              }`}>
-                {esSuperusuario ? 'Superusuario' : 'Usuario'}
-              </span>
-            </p>
+            <p className="text-sm text-gray-500">Bienvenido, {user.nombre}</p>
+            <h1 className="text-3xl font-bold text-gray-800 mt-1">
+              🏪 {typeof window !== 'undefined' ? localStorage.getItem('tiendaNombre') || '' : ''}
+            </h1>
           </div>
           <button
             onClick={handleLogout}
