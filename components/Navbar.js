@@ -79,8 +79,7 @@ export default function Navbar() {
       <nav className="bg-white border-b shadow-sm">
         <div className="max-w-6xl mx-auto flex items-center p-4">
 
-          <h1 className="font-bold text-xl text-sky-500 shrink-0">Sistema de Ventas {tiendaNombre && <span className="text-sm font-normal text-gray-400">— {tiendaNombre}</span>}</h1>
-          </h1>
+          <h1 className="font-bold text-xl text-sky-500 shrink-0">Sistema de Ventas {typeof window !== "undefined" && tiendaNombre ? <span className="text-sm font-normal text-gray-400">— {tiendaNombre}</span> : null}</h1>
 
           <div className="flex gap-6 ml-6 flex-1">
             {tabs.map(tab => (

@@ -277,7 +277,7 @@ export default function PagoList() {
       )}
 
       {/* Resumen superusuario */}
-      resultado.length > 0 && (
+      {resultado.length > 0 && (
         <div className="border rounded-xl bg-white shadow-sm px-5 py-4 space-y-2">
           <p className="text-sm font-semibold text-gray-600 mb-1">Resumen general</p>
           <div className="flex justify-between text-sm">

@@ -316,7 +316,6 @@ export default function ClienteList({ reload, esSuperusuario }) {
                           className="text-xs px-3 py-1 rounded-lg border border-sky-300 text-sky-600 hover:bg-sky-50 transition">
                           Editar
                         </button>
-                        <>
                           <button onClick={() => handleBloquear(c)}
                             className={`text-xs px-3 py-1 rounded-lg border transition ${c.bloqueado
                                 ? 'border-green-400 text-green-600 hover:bg-green-50'
@@ -324,13 +323,10 @@ export default function ClienteList({ reload, esSuperusuario }) {
                               }`}>
                             {c.bloqueado ? 'Desbloquear' : 'Bloquear'}
                           </button>
-                        )}
-                        <>
-                          <button onClick={() => handleEliminar(c.id)}
+                        <button onClick={() => handleEliminar(c.id)}
                             className="text-xs px-3 py-1 rounded-lg border border-red-300 text-red-500 hover:bg-red-50 transition">
                             Eliminar
                           </button>
-                        )}
                       </div>
                     </td>
                   </tr>

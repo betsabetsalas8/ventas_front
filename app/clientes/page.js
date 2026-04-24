@@ -53,7 +53,7 @@ export default function ClientesPage() {
 
           {/* Tabs — solo superusuario ve "Agregar Cliente" */}
           <div className="flex border-b">
-            (true && (
+            {true && (
               <button
                 onClick={() => setActiveTab('form')}
                 className={`flex-1 py-3 font-semibold transition ${
