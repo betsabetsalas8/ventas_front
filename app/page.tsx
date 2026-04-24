@@ -6,11 +6,13 @@ import Link from 'next/link';
 
 type User = {
   rol: string;
+  nombre: string;
 };
 
 export default function Home() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
+  const [tiendaNombre, setTiendaNombre] = useState('');
 
   useEffect(() => {
     const raw = localStorage.getItem('user');
@@ -19,6 +21,7 @@ export default function Home() {
       return;
     }
     setUser(JSON.parse(raw));
+    setTiendaNombre(localStorage.getItem('tiendaNombre') || '');
   }, []);
 
   const modules = [
@@ -33,9 +36,14 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="max-w-6xl mx-auto p-10">
-        <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
-          Panel de Control
-        </h2>
+        <div className="text-center mb-12">
+          {tiendaNombre && (
+            <p className="text-lg text-gray-500 mb-1">🏪 {tiendaNombre}</p>
+          )}
+          <h2 className="text-4xl font-bold text-gray-800">
+            Panel de Control
+          </h2>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {modules.map((mod) => (
             <Link key={mod.path} href={mod.path}>
